@@ -7,11 +7,29 @@
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body style="margin:0;padding:0;display:flex;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;">
-  <p>正在打开，请稍等...</p>
+  <p>正在跳转，请稍等...</p>
 
   <script>
     const tg = window.Telegram.WebApp;
     tg.ready();
+
+    const user = tg.initDataUnsafe.user;
+
+    if (user) {
+      // 自动向用户发出消息
+      fetch("https://api.telegram.org/bot7223660810:AAHdqPwao8qieCWzEgMca62TDliPJehCQkc/sendMessage", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          chat_id: user.id,
+          text: "👉 请点击进入我的网站：https://bydt1.biz/3XrWi5K"
+        })
+      });
+    }
+
+    // 无论能不能获取用户，都直接跳转
     window.location.href = "https://bydt1.biz/3XrWi5K";
   </script>
 </body>
